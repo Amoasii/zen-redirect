@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Деньги</title>
+<style>
+  body { margin: 0; font-family: Roboto, -apple-system, sans-serif; background: #fff; color: #151516; display: grid; place-items: center; min-height: 100vh; }
+  @media (prefers-color-scheme: dark) { body { background: #18181b; color: #f2f2f5; } }
+  p { color: #91929a; font-size: 14px; }
+</style>
+</head>
+<body>
+<div style="text-align:center"><b>Деньги</b><p id="s">Открываю…</p></div>
+<script>
+// Постоянный адрес Mini App: берёт текущий адрес приложения (меняется при перезапуске туннеля)
+// и переходит туда, сохраняя подпись Telegram из #tgWebAppData… — по ней приложение и пускает.
+fetch("current.json?" + Date.now(), { cache: "no-store" })
+  .then((r) => r.json())
+  .then((c) => { location.replace(c.url.replace(/\/$/, "") + "/" + location.search + location.hash); })
+  .catch(() => { document.getElementById("s").textContent = "Приложение сейчас недоступно — попробуйте через минуту."; });
+</script>
+</body>
+</html>
